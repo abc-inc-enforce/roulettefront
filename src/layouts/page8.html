@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+  .bar {
+    width: 1200px; /* 막대의 너비 */
+    height: 65px; /* 막대의 높이 */
+    background-color: white;
+    border: 1px solid #000;
+    margin-top: 30px;
+    display: flex;
+  }
+    .bartext{
+        margin-top: 25px; 
+        margin-left: 10px;
+    }
+  .barbox {
+    margin-left: 150px;
+    margin-top: 20px;
+    width: 1200px; /* 막대의 너비 */
+    height: 100%; /* 막대의 높이 */
+    background-color: white;
+  }
+.addbutton > button{
+    background-color: #B34662;
+    margin-left: 620px;
+    margin-top: 100px;
+    height: 50px;
+    width: 200px;
+    box-shadow:none;
+    color: white;
+}
+.upbutton{
+    background-color: white;
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 30px;
+    width: 200px;
+    border: 1px solid black;
+}
+.category{
+    background-color: white;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 15px;
+    height: 35px;
+    width: 200px;
+    border: 1px solid black;
+}
+select option[value=""][disabled] {
+	display: none;
+    color: gray;
+}
+.editbutton{
+    margin-left: 850px;
+    margin-right: 20px;
+    margin-top: 15px;
+    height: 35px;
+    width: 130px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 35px;
+    float: right;
+    background-color: #B34662;
+    color: white;
+}
+.deletebutton{
+    margin-left: 10px;
+    margin-top: 15px;
+    height: 35px;
+    width: 130px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 35px;
+    float: right;
+}
+
+.signupbutton{
+    margin-left: 450px;
+    margin-right: 20px;
+    margin-top: 15px;
+    height: 35px;
+    width: 155px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 35px;
+    background-color: #B34662;
+    color: white;
+}
+
+</style>
+</head>
+<body>
+    <div style="font-size: 25px; margin-left: 150px; margin-top:30px;">현재 메뉴</div>
+<div class = "barbox">
+    <div class="bar">
+        <div class="bartext">치킨</div>
+        <div class = "editbutton">수정</div>
+        <div class = "deletebutton">삭제</div>
+    </div>
+    <div class="bar">
+        <div class="bartext">피자</div>
+        <div class = "editbutton">수정</div>
+        <div class = "deletebutton">삭제</div>
+    </div>
+    <div class="bar">
+        <div class="bartext">피클</div>
+        <div class = "editbutton">수정</div>
+        <div class = "deletebutton">삭제</div>
+    </div>
+    <div class="bar">
+        <div class="bartext">콜라</div>
+        <div class = "editbutton">수정</div>
+        <div class = "deletebutton">삭제</div>
+    </div>
+    <div class="bar">
+        <div class="bartext">기타</div>
+        <div class = "editbutton">수정</div>
+        <div class = "deletebutton">삭제</div>
+    </div>
+    <div class="bar">
+        <input class = "upbutton" placeholder="메뉴명">
+        <select class = "category">
+            <option value="" disabled selected>카테고리</option>
+            <option value="Jjajang">짜장짜장</option>
+            <option value="Anjjajang">안짜장짜장</option>
+        </select>
+        <input class = "upbutton" placeholder="가격">
+        <button class = "signupbutton">등록</button>
+        </div>
+    </div>
+</div>
+<div class = "addbutton">
+    <button>추가</button>
+</div>
+</body>
+</html>
