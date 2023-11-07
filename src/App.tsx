@@ -1,7 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import Table from "./pages/Table";
+import TableManage from "./pages/TableManage";
+import CreateMenu from "./pages/CreateMenu";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Table />} />
+            <Route path="/" element={<TableManage />} />
+            <Route path="/menu" element={<CreateMenu />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

@@ -13,7 +13,7 @@ export const header = styled.div`
   display: flex;
   align-items: center;
   /* background-color: grey; */
-  margin-top: 1%;
+  /* margin-top: 1%; */
 `;
 
 export const title = styled.div`
