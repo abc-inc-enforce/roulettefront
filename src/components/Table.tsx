@@ -12,7 +12,7 @@ const Table: React.FC<TableProps> = ({ tableNum }) => {
       <S.tableNum>{tableNum}번 테이블</S.tableNum>{" "}
       {/* props로 받아온 tableNum을 사용 */}
       <S.tableBtn>주문목록</S.tableBtn>
-      <S.tableBtn color="#d9064d">결제확인</S.tableBtn>
+      <S.tableBtn color="#b83858">결제확인</S.tableBtn>
     </S.table>
   );
 
