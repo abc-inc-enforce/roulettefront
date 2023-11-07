@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import TableManage from "./pages/TableManage";
 import CreateMenu from "./pages/CreateMenu";
+
 import PriceUpgrade from "./pages/PriceUpgrade";
 import Order from "./pages/Order";
 
@@ -19,7 +20,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
-      {/*<h1>주문테이블</h1> */}
     </div>
   );
 }
