@@ -17,9 +17,10 @@ export const header = styled.div`
 `;
 
 export const title = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding-left: 8%;
   padding-right: 74%;
+  font-weight: bold;
 `;
 
 export const backIcon = styled.img`
