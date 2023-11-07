@@ -10,13 +10,6 @@ const CreateMenu = () => {
         <S.backIcon src={backIcon} />
       </S.header>
       <S.barlist>
-        {menu.map(({ name }, index) => (
-          <S.bar>
-            <S.bartext>{name}</S.bartext>
-            <S.Btn color="#b83858">수정</S.Btn>
-            <S.Btn>삭제</S.Btn>
-          </S.bar>
-        ))}
         <S.bar>
           <S.bartext>
             <S.inputMenu placeholder="메뉴명"></S.inputMenu>
@@ -32,8 +25,15 @@ const CreateMenu = () => {
           </S.bartext>
           <S.Btn color="#b83858">등록</S.Btn>
         </S.bar>
-        <S.addBtn>추가</S.addBtn>
+        {menu.map(({ name }, index) => (
+          <S.bar>
+            <S.bartext>{name}</S.bartext>
+            <S.Btn color="#b83858">수정</S.Btn>
+            <S.Btn>삭제</S.Btn>
+          </S.bar>
+        ))}
       </S.barlist>
+      <S.addBtn>추가</S.addBtn>
     </S.body>
   );
 };

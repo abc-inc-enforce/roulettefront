@@ -4,6 +4,7 @@ import { RecoilRoot } from "recoil";
 import TableManage from "./pages/TableManage";
 import CreateMenu from "./pages/CreateMenu";
 import PriceUpgrade from "./pages/PriceUpgrade";
+import Order from "./pages/Order";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<TableManage />} />
+            <Route path="/table" element={<TableManage />} />
             <Route path="/menu" element={<CreateMenu />} />
             <Route path="/upgrade" element={<PriceUpgrade />} />
+            <Route path="/order" element={<Order />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
