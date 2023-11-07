@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import TableManage from "./pages/TableManage";
 import CreateMenu from "./pages/CreateMenu";
+
+import PriceUpgrade from "./pages/PriceUpgrade";
 import Order from "./pages/Order";
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/table" element={<TableManage />} />
             <Route path="/menu" element={<CreateMenu />} />
+            <Route path="/upgrade" element={<PriceUpgrade />} />
             <Route path="/order" element={<Order />} />
           </Routes>
         </BrowserRouter>
