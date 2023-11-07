@@ -20,7 +20,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
-      {/*<h1>주문테이블</h1> */}
     </div>
   );
 }
