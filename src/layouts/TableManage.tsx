@@ -1,14 +1,11 @@
 import * as S from "./TableManage.style";
-import backIcon from "../assets/back.svg";
 import Table from "../components/Table";
+import Header from "../components/OnwerHeader";
 
 const TableManage = () => {
   return (
     <S.body>
-      <S.header>
-        <S.title>주문테이블</S.title>
-        <S.backIcon src={backIcon} />
-      </S.header>
+      <Header></Header>
       <S.tablelist>
         <ul>
           <li>

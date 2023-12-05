@@ -1,14 +1,11 @@
 import * as S from "./CreateMenu.style";
-import backIcon from "../assets/back.svg";
+import Header from "../components/OnwerHeader";
 import menu from "../data/menu";
 
 const CreateMenu = () => {
   return (
     <S.body>
-      <S.header>
-        <S.title>현재 메뉴</S.title>
-        <S.backIcon src={backIcon} />
-      </S.header>
+      <Header />
       <S.barlist>
         <S.bar>
           <S.bartext>
