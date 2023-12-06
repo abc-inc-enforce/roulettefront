@@ -9,7 +9,7 @@ export const body = styled.div`
 export const tablelist = styled.div`
   width: 82%;
   margin: auto;
-  height: 70%;
+  height: 65%;
   display: flex;
   overflow-y: scroll;
   li {

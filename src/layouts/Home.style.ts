@@ -15,8 +15,10 @@ export const onwer = styled.div`
   background-color: pink;
   margin-right: 5%;
   border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   &:hover {
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
   }
   a {
     display: flex;
@@ -35,8 +37,10 @@ export const customer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   &:hover {
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   }
 `;
 export const customerBox = styled.div`
