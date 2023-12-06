@@ -320,7 +320,7 @@ export const inviteUpgrade = styled.div`
   z-index: 1001;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   display: block;
-  animation: fadeIn 1.3s ease-in;
+  animation: fadeIn 0.8s ease-in;
 
   @keyframes fadeIn {
     0% {

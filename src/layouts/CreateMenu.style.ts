@@ -7,21 +7,29 @@ export const body = styled.div`
 `;
 
 export const barlist = styled.div`
-  width: 82%;
+  width: 88%;
   margin: auto;
-  height: 73%;
+  height: 69%;
   overflow-y: scroll;
+  /* border: 2px solid lightgrey; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 `;
 
 export const bar = styled.div`
-  width: 98%; /* 막대의 너비 */
+  width: 90%; /* 막대의 너비 */
   height: 10%; /* 막대의 높이 */
   background-color: white;
-  border: 1px solid #000;
+  border: 1px solid lightgrey;
+  margin: auto;
   margin-top: 20px;
   display: flex;
   align-items: center;
   border-radius: 15px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #f9f0f2;
+  }
 `;
 export const bartext = styled.div`
   padding-left: 2%;
@@ -34,34 +42,18 @@ export const bartext = styled.div`
 export const Btn = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${(props) => (props.color ? props.color : "white")};
-  color: ${(props) => (props.color ? "white" : "black")};
+  background-color: white;
+  color: black;
   height: 70%;
+  border: 1.5px solid lightgrey;
   width: 10%;
   align-items: center;
-  border: 1px solid black;
+  border-radius: 10px;
   margin-right: 2%;
-  /* border-radius: ; */
+  &:hover {
+    cursor: pointer;
+  }
 `;
-
-export const inputMenu = styled.input`
-  background-color: white;
-  height: 70%;
-  width: 20%;
-  border: 1px solid black;
-  text-align: center;
-  margin-right: 3%;
-`;
-
-export const category = styled.select`
-  background-color: white;
-  height: 80%;
-  width: 20%;
-  border: 1px solid black;
-  text-align: center;
-  margin-right: 3%;
-`;
-
 export const addBtn = styled.div`
   background-color: #b83858;
   height: 50px;
@@ -70,7 +62,98 @@ export const addBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
   margin: auto;
-  margin-top: 1%;
+  margin-top: 2%;
+  border-radius: 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  &:hover {
+    cursor: pointer;
+    background-color: #85263e;
+  }
+`;
+
+export const createMenu = styled.div`
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  background-color: white;
+  z-index: 1001;
+  width: 40%;
+  height: 60%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`;
+export const popupheader = styled.div`
+  display: flex;
+  width: 100%;
+  h3 {
+    padding: 4% 0;
+    margin: auto;
+  }
+  p {
+    width: 5%;
+    height: 5%;
+    margin: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export const menuContainer = styled.div`
+  width: 90%;
+  /* background-color: black; */
+  height: 80%;
+  margin: auto;
+  display: flex;
+`;
+
+export const FileUpload = styled.input.attrs({
+  type: "file",
+})`
+  opacity: 0;
+  position: absolute;
+  height: 90%;
+  width: 45%;
+  cursor: pointer;
+`;
+
+export const menuImg = styled.div`
+  display: flex;
+  text-align: center;
+  border-radius: 10px;
+  width: 47.5%;
+  height: 90%;
+  border: none;
+  font-size: 1rem;
+  background-color: #eeeeee;
+  color: grey;
+  justify-content: center;
+  text-align: left;
+  align-items: center;
+  &:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+`;
+export const img = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+`;
+export const menuInfo = styled.div`
+  margin-left: 5%;
+  width: 47.5%;
+  height: 90%;
+  padding-top: 3%;
+`;
+
+export const inputInfo = styled.input`
+  width: 95%;
+  height: 17%;
+  border-radius: 20px;
+  border: 1px solid grey;
+  padding-left: 5%;
+  margin-bottom: 5%;
 `;

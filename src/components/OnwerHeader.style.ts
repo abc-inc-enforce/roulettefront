@@ -10,12 +10,13 @@ export const backIcon = styled.img`
 export const header = styled.div`
   width: 100%;
   height: 11%;
+  background-color: #b83858;
+  color: white;
   margin: 0;
   display: flex;
   align-items: center;
   margin-bottom: 2%;
   justify-content: center;
-  border-bottom: 2px solid grey;
   ul {
     width: 75%;
     list-style: none;
@@ -25,7 +26,7 @@ export const header = styled.div`
   }
   a {
     text-decoration: none;
-    color: black;
+    color: white;
     font-weight: bold;
   }
 `;
