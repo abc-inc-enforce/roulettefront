@@ -4,9 +4,10 @@ import * as S from "./Roulette.style";
 
 interface RouletteProps {
   options: string[];
+  category: string;
 }
 
-const Roulette: React.FC<RouletteProps> = ({ options }) => {
+const Roulette: React.FC<RouletteProps> = ({ options, category }) => {
   const [result, setResult] = useState<string | null>();
   const [spinning, setSpinning] = useState(false);
 
@@ -32,8 +33,24 @@ const Roulette: React.FC<RouletteProps> = ({ options }) => {
         <S.resultPopup>
           <h2>{result}가 당첨되었습니다!</h2>
           <S.btn>
-            <S.add>장바구니 담기</S.add>
-            <S.giveup onClick={() => setResult(null)}>포기하기..</S.giveup>
+            {category === "메뉴 룰렛" && (
+              <>
+                <S.add>바로 주문</S.add>
+                <S.giveup onClick={() => setResult(null)}>
+                  다음에 주문하기..
+                </S.giveup>
+              </>
+            )}
+            {category === "결제자 룰렛" && (
+              <>
+                <S.add onClick={() => setResult(null)}>
+                  결과에 승복하겠습니다!
+                </S.add>
+                <S.giveup onClick={() => setResult(null)}>
+                  결과에 승복하겠습니다..
+                </S.giveup>
+              </>
+            )}
           </S.btn>
         </S.resultPopup>
       )}
