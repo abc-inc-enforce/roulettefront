@@ -171,6 +171,7 @@ const Order = () => {
             handleDelete={handleDelete}
             totalPrice={totalPrice}
             InvitingUpgrade={InvitingUpgrade}
+            left="58%"
           >
             {orderList.map(({ name, count, price }, index) => (
               <li key={index}>

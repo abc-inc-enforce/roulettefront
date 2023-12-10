@@ -10,8 +10,8 @@ export const upgradeInfo = styled.div`
 `;
 export const upgradeBox = styled.div`
   position: fixed;
-  top: 53%;
-  left: 53%;
+  top: 50%;
+  left: 58%;
   transform: translate(-50%, -50%);
   z-index: 1001;
   /* background-color: #4b2f28; */
@@ -157,14 +157,14 @@ export const weakbutton = styled.button`
 export const inviteUpgrade = styled.div`
   position: fixed;
   top: 50%;
-  left: 53%;
+  left: 58%;
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 3%;
   z-index: 1001;
   box-shadow: 0 0 13px rgba(0, 0, 0, 0.4);
   display: block;
-  animation: fadeIn 0.8s ease-in;
+  animation: fadeIn 1.2s ease-in;
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -175,5 +175,97 @@ export const inviteUpgrade = styled.div`
     100% {
       opacity: 1;
     }
+  }
+`;
+
+export const resultPopup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  z-index: 1001;
+  h2 {
+    padding-top: 5%;
+    padding-bottom: 2%;
+    margin: 0;
+  }
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+`;
+
+export const priceBox = styled.div`
+  width: 60%;
+  height: 20%;
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-decoration: underline;
+`;
+export const Btn = styled.div`
+  height: 50px;
+  width: 200px;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  font-size: large;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #ffd700, #b83858);
+  background-size: 300% 100%;
+  animation: gradientMove 2s linear infinite;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 10%;
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.5) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.5) 75%,
+      transparent 75%,
+      transparent
+    );
+    opacity: 0;
+    pointer-events: none;
+  }
+  transition: all 0.3s ease; // 호버 효과를 부드럽게 만들기 위한 트랜지션 추가
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
   }
 `;

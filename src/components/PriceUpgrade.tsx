@@ -13,11 +13,15 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
   const [discount, setDiscount] = useState(0.95);
   const [upgrade, setUpgrade] = useState(false);
   const [upgradeSuccess, setUpgradeSuccess] = useState("");
-  const [price, setPrice] = useState(80000);
+  const basePrice = 80000;
+  const [price, setPrice] = useState(basePrice);
+  const [result, setResult] = useState(false);
 
   const handleUpgrade = () => {
     const randomValue = Math.floor(Math.random() * 100);
     console.log("Random Value:", randomValue);
+
+    // 처음엔 90% 성공인데 성공할때마다 성공확률 10% 감소 할인 5% 실패하면 원가의 1.5배 근데 40 -> 20 (여긴 50% 할인) 20 -> 50( 여기 무료)
 
     if (randomValue < percent) {
       setUpgradeSuccess(
@@ -25,11 +29,20 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
           (1 - discount) * 100,
         )}%`,
       );
-      setPercent(percent - 10);
-      setDiscount(discount - 0.03);
+      if (percent == 40) setPercent(percent - 20);
+      else if (percent == 20) setPercent(5);
+      else setPercent(percent - 10);
+      if (percent <= 41) {
+        if (percent == 5) {
+          setDiscount(0.05);
+          setResult(true);
+        } else setDiscount(discount - 0.2);
+      } else setDiscount(discount - 0.05);
       setPrice(Math.floor(price * discount));
     } else {
+      setPrice(basePrice * 1.5);
       setUpgradeSuccess("강화에 실패하였습니다....");
+      setResult(true);
     }
     setUpgrade(true);
     const timerId = setTimeout(() => {
@@ -37,9 +50,20 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
     }, 1500);
   };
 
+  const handleResult = () => {
+    setPriceUpgrade(false);
+  };
+
   return (
     <S.upgradeBox>
       {upgrade && invitePopup(upgradeSuccess)}
+      {result && (
+        <S.resultPopup>
+          <h2>최종 계산서</h2>
+          <S.priceBox>${price}</S.priceBox>
+          <S.Btn onClick={() => setPriceUpgrade(false)}>확인했어요</S.Btn>
+        </S.resultPopup>
+      )}
       <S.noticeline>
         실패시 가격이 1.5배 비싸집니다. 한번 실패하면 더이상 도전할 수 없습니다.
       </S.noticeline>
@@ -56,7 +80,11 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
 
       <S.button>
         <S.gobutton onClick={handleUpgrade}>강화하기</S.gobutton>
-        <S.weakbutton onClick={() => setPriceUpgrade(false)}>
+        <S.weakbutton
+          onClick={() => {
+            setResult(true);
+          }}
+        >
           그만두기..
         </S.weakbutton>
       </S.button>

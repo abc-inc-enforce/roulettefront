@@ -15,6 +15,7 @@ const TableManage = () => {
           showOrderPopup={showOrderPopup}
           setShowOrderPopup={setShowOrderPopup}
           totalPrice={0}
+          left="50%"
         ></OrderPopup>
       )}
       <S.tablelist>
