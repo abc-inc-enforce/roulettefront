@@ -1,16 +1,27 @@
+import React, { useState } from "react";
 import * as S from "./TableManage.style";
 import Table from "../components/Table";
 import Header from "../components/OnwerHeader";
+import OrderPopup from "../components/OrderPopup";
 
 const TableManage = () => {
+  const [showOrderPopup, setShowOrderPopup] = useState(false);
+
   return (
     <S.body>
       <Header></Header>
+      {showOrderPopup && (
+        <OrderPopup
+          showOrderPopup={showOrderPopup}
+          setShowOrderPopup={setShowOrderPopup}
+          totalPrice={0}
+        ></OrderPopup>
+      )}
       <S.tablelist>
         <ul>
           {[...Array(12)].map((_, i) => (
             <li key={i}>
-              <Table tableNum={i + 1} />
+              <Table tableNum={i + 1} setListPopup={setShowOrderPopup} />
             </li>
           ))}
         </ul>

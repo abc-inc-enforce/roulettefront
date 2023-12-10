@@ -5,10 +5,28 @@ export const body = styled.div`
   height: 100vh;
   margin: 0;
 `;
+export const category = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 8%;
+  background-color: ${(props) => (props.color ? props.color : null)};
+  color: ${(props) => (props.color ? "#b83858" : "black")};
+  border-radius: 10px;
+  /* margin-top: 10%; */
+  padding-left: 10%;
+  font-weight: bold;
+  font-size: 1.1rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 export const barlist = styled.div`
-  width: 88%;
+  width: 75%;
   margin: auto;
+  margin-top: 2%;
+  margin-left: 20%;
   height: 69%;
   overflow-y: scroll;
   /* border: 2px solid lightgrey; */
@@ -21,7 +39,7 @@ export const bar = styled.div`
   background-color: white;
   border: 1px solid lightgrey;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 3%;
   display: flex;
   align-items: center;
   border-radius: 15px;
@@ -64,12 +82,26 @@ export const addBtn = styled.div`
   justify-content: center;
   margin: auto;
   margin-top: 2%;
+  margin-left: ${(props) => (props.color ? "50%" : "")};
   border-radius: 20px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   &:hover {
     cursor: pointer;
     background-color: #85263e;
   }
+`;
+export const sidebar = styled.div`
+  background-color: #f6e5ea;
+  height: 100%;
+  width: 16%;
+  margin: 0;
+  position: fixed;
+`;
+export const categoryList = styled.div`
+  width: 90%;
+  margin-left: 10%;
+  height: 100%;
+  padding-top: 15%;
 `;
 
 export const createMenu = styled.div`

@@ -24,11 +24,11 @@ const Home = () => {
   return (
     <>
       <S.body>
-        <S.onwer>
+        <S.owner>
           <Link to="/table">
             <S.choice>주인</S.choice>
           </Link>
-        </S.onwer>
+        </S.owner>
 
         <S.customer onClick={handleOnClick}>
           <S.customerBox>
