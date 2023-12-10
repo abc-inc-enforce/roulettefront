@@ -1,12 +1,12 @@
 import * as S from "./Order.style";
 import Food from "../components/Food";
 import category from "../data/category";
+import menu from "../data/menu";
 import backIcon from "../assets/back.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OrderPopup from "../components/OrderPopup";
 import { PriceUpgrade, invitePopup } from "../components/PriceUpgrade";
-import MenuData from "../data/menuData";
 import {
   SideBarComponents,
   OrderHeaderComponets,
@@ -20,7 +20,6 @@ type OrderItem = {
 
 const Order = () => {
   const [categoryValue, setcategoryValue] = useState("메인");
-  const menu = MenuData();
   const [showAddPopup, setShowAddPopup] = useState(false);
   const [showMenuPopup, setShowMenuPopup] = useState(false);
   const [showOrderPopup, setShowOrderPopup] = useState(false);

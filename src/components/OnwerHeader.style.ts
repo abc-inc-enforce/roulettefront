@@ -15,7 +15,6 @@ export const header = styled.div`
   margin: 0;
   display: flex;
   align-items: center;
-  margin-bottom: 2%;
   justify-content: center;
   ul {
     width: 75%;
@@ -28,5 +27,9 @@ export const header = styled.div`
     text-decoration: none;
     color: white;
     font-weight: bold;
+    padding-bottom: 30%;
+  }
+  a:hover {
+    border-bottom: 3px solid white;
   }
 `;

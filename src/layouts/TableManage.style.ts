@@ -4,6 +4,7 @@ export const body = styled.div`
   width: 100vw;
   height: 100vh;
   margin: 0;
+  background-color: none;
 `;
 
 export const tablelist = styled.div`
@@ -38,4 +39,17 @@ export const notice = styled.div`
   align-items: center;
   padding-left: 2%;
   margin-top: 3%;
+`;
+
+export const listPopup = styled.div`
+  position: fixed;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  z-index: 1001;
+  width: 30%;
+  height: 57%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;

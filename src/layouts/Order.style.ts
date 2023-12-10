@@ -6,35 +6,6 @@ export const body = styled.div`
   margin: 0;
 `;
 
-export const sidebar = styled.div`
-  background-color: #b83858;
-  height: 100%;
-  width: 16%;
-  margin: 0;
-  position: fixed;
-`;
-
-export const tableNum = styled.div`
-  height: 8%;
-  width: 80%;
-  background-color: white;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  border-radius: 8px;
-  margin-top: 10%;
-  font-size: 1.2rem;
-`;
-
-export const categoryList = styled.div`
-  width: 90%;
-  margin-left: 10%;
-  height: 100%;
-  padding-top: 15%;
-`;
-
 export const category = styled.div`
   display: flex;
   align-items: center;
@@ -59,34 +30,6 @@ export const display = styled.div`
   background-color: white;
   padding-left: 2%;
   padding-right: 2%;
-`;
-
-export const header = styled.div`
-  padding-top: 1%;
-  width: 100%;
-  height: 10%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  ul {
-    width: 100%;
-    height: 100%;
-    list-style: none;
-    display: flex;
-    padding: 0;
-  }
-  li {
-    width: 15%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #select {
-    border-bottom: 2.5px solid #b83858;
-  }
 `;
 
 export const menu = styled.div`
@@ -131,13 +74,6 @@ export const orderBtn = styled.div`
   }
 `;
 
-export const backIcon = styled.img`
-  width: 3%;
-  margin-right: 5%;
-  &:hover {
-    cursor: pointer;
-  }
-`;
 export const addPopup = styled.div`
   position: fixed;
   top: 50%;
@@ -310,34 +246,11 @@ export const button = styled.div`
     cursor: pointer;
   }
 `;
-export const inviteUpgrade = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 57%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 3%;
-  z-index: 1001;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  display: block;
-  animation: fadeIn 0.8s ease-in;
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.4;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-`;
 export const Accept = styled.div`
   /* width: 50%; */
   top: 60%;
-  left: ${(props) => (props.color ? "58%" : "50%")};
+  left: ${(props) => (props.color ? "54%" : "46%")};
   position: fixed;
   transform: matrix() (-50%, -50%);
   background-color: ${(props) => (props.color ? props.color : "pink")};
@@ -347,6 +260,7 @@ export const Accept = styled.div`
   display: black;
   padding: 0.5% 2%;
   animation: fadeIn 2s ease-in;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -360,5 +274,6 @@ export const Accept = styled.div`
   }
   &:hover {
     cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 255, 102, 0.8);
   }
 `;

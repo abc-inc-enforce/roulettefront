@@ -9,7 +9,7 @@ export const body = styled.div`
   align-items: center;
 `;
 
-export const onwer = styled.div`
+export const owner = styled.div`
   width: 40%;
   height: 90%;
   background-color: pink;
