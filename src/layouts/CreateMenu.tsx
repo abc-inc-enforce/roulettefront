@@ -3,10 +3,10 @@ import Header from "../components/OnwerHeader";
 import { useState, useEffect } from "react";
 import React from "react";
 import MenuData from "../data/menuData";
-import category from "../data/category";
 import compress from "image-compressor.js";
 
 type MenuItem = {
+  id: number;
   img: string;
   name: string;
   category: string;
@@ -20,14 +20,27 @@ const CreateMenu = () => {
   const [Index, setIndex] = useState(1000);
   const reader = new FileReader();
   const [menuInfo, setMenuInfo] = useState<MenuItem>({
+    id: 0,
     img: "",
     name: "",
     category: "",
     price: 0,
   });
+
+  const [categories, setCategories] = useState<string[]>([]);
   useEffect(() => {
     fetchMenuData();
-  }, []); // 빈 배열을 전달하여 컴포넌트가 처음 마운트될 때만 실행되도록 함
+  }, []);
+  useEffect(() => {
+    updateCategories();
+  }, [menuData]);
+  const updateCategories = () => {
+    // menuData에서 중복을 제거하여 카테고리 업데이트
+    const uniqueCategories = Array.from(
+      new Set(menuData.map((item) => item.category)),
+    );
+    setCategories(uniqueCategories);
+  };
 
   const fetchMenuData = () => {
     fetch("http://localhost:8080/menus")
@@ -63,21 +76,26 @@ const CreateMenu = () => {
     }
   };
 
-  const handleDelete = (indexToDelete: number) => {
-    setMenuData((prevMenuData) => {
-      const updatedMenuData = prevMenuData.filter(
-        (item, index) => index !== prevMenuData.length - 1 - indexToDelete,
-      );
-
-      // backendSend();
-      return updatedMenuData;
-    });
+  const handleDelete = (idToDelete: number) => {
+    fetch(`http://localhost:8080/menus/${idToDelete}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // 삭제 성공 시 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
+          return fetch("http://localhost:8080/menus");
+        } else {
+          throw new Error("메뉴 삭제 실패");
+        }
+      })
+      .then((response) => response.json())
+      .then((data) => setMenuData(data))
+      .catch((error) => console.error("Error:", error));
   };
   const handleFormSubmit = () => {
     if (
       menuInfo.name !== "" &&
       menuInfo.category !== "" &&
-      menuInfo.price &&
       menuInfo.img !== ""
     ) {
       const newMenu = [...menuData, menuInfo];
@@ -87,24 +105,45 @@ const CreateMenu = () => {
       alert("등록되었습니다.");
       setcategoryValue(menuInfo.category);
       setCreateMenu(false);
-      fetch("http://localhost:8080/menus", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(menuInfo),
-      })
-        .then((response) => {
-          if (response.ok) {
-            // 성공적으로 처리되면 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
-            return fetch("http://localhost:8080/menus");
-          } else {
-            throw new Error("메뉴 생성 실패");
-          }
+      if (Index == 1000) {
+        fetch("http://localhost:8080/menus", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(menuInfo),
         })
-        .then((response) => response.json())
-        .then((data) => setMenuData(data))
-        .catch((error) => console.error("Error:", error));
+          .then((response) => {
+            if (response.ok) {
+              // 성공적으로 처리되면 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
+              return fetch("http://localhost:8080/menus");
+            } else {
+              throw new Error("메뉴 생성 실패");
+            }
+          })
+          .then((response) => response.json())
+          .then((data) => setMenuData(data))
+          .catch((error) => console.error("Error:", error));
+      } else {
+        fetch(`http://localhost:8080/menus/${menuInfo.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(menuInfo),
+        })
+          .then((response) => {
+            if (response.ok) {
+              // 성공적으로 처리되면 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
+              return fetch("http://localhost:8080/menus");
+            } else {
+              throw new Error("메뉴 생성 실패");
+            }
+          })
+          .then((response) => response.json())
+          .then((data) => setMenuData(data))
+          .catch((error) => console.error("Error:", error));
+      }
       // backendSend;
     } else {
       alert("값이 누락 되었습니다.");
@@ -155,18 +194,13 @@ const CreateMenu = () => {
                 onChange={(event) =>
                   setMenuInfo({
                     ...menuInfo,
-                    price: parseInt(event.target.value),
+                    price: parseInt(event.target.value) || 0,
                   })
                 }
               />
               <S.addBtn
                 onClick={() => {
                   handleFormSubmit();
-                  if (Index !== 1000) {
-                    console.log(Index);
-                    handleDelete(Index);
-                    setIndex(1000);
-                  }
                 }}
               >
                 등록
@@ -184,7 +218,7 @@ const CreateMenu = () => {
       {createMenu && creaetMenuPopup()}
       <S.sidebar>
         <S.categoryList>
-          {category.map(({ name }, index) =>
+          {categories.map((name, index) =>
             name === categoryValue ? (
               <S.category
                 onClick={() => setcategoryValue(name)}
@@ -211,22 +245,27 @@ const CreateMenu = () => {
               <>
                 <S.bar
                   onClick={() => {
-                    setCreateMenu(true);
-                    setIndex(index + 1);
+                    console.log(index);
                     index = menuData.length - 1 - index;
+                    const menuId = menuData[index].id;
+                    setIndex(index);
                     setMenuInfo({
+                      id: menuId,
                       img: menuData[index].img,
                       name: menuData[index].name,
                       category: menuData[index].category,
                       price: menuData[index].price,
                     });
+                    setCreateMenu(true);
                   }}
                 >
                   <S.bartext>{name}</S.bartext>
                   <S.Btn
                     onClick={(e) => {
+                      const updatedIndex = menuData.length - 1 - index;
+                      const menuId = menuData[updatedIndex].id;
                       e.stopPropagation();
-                      handleDelete(index);
+                      handleDelete(menuId);
                     }}
                   >
                     삭제
@@ -238,7 +277,8 @@ const CreateMenu = () => {
       </S.barlist>
       <S.addBtn
         onClick={() => {
-          setMenuInfo({ img: "", name: "", category: "", price: 0 });
+          setMenuInfo({ id: 0, img: "", name: "", category: "", price: 0 });
+          setIndex(1000);
           setCreateMenu(true);
         }}
         color="ss"

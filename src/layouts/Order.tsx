@@ -1,6 +1,6 @@
 import * as S from "./Order.style";
 import Food from "../components/Food";
-import category from "../data/category";
+// import category from "../data/category";
 import backIcon from "../assets/back.svg";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,6 +37,18 @@ const Order = () => {
     setMenuInfo({ ...menuInfo, name, price, count: 1 });
     setShowMenuPopup(true);
   };
+  const [categories, setCategories] = useState<string[]>([]);
+  useEffect(() => {
+    updateCategories();
+  }, [menu]);
+  const updateCategories = () => {
+    // menuData에서 중복을 제거하여 카테고리 업데이트
+    const uniqueCategories = Array.from(
+      new Set(menu.map((item) => item.category)),
+    );
+    setCategories(uniqueCategories);
+  };
+
   const menuCount = (value: boolean) => {
     if (value) {
       setMenuInfo({ ...menuInfo, count: menuInfo.count + 1 });
@@ -79,7 +91,7 @@ const Order = () => {
   return (
     <S.body>
       <SideBarComponents>
-        {category.map(({ name }, index) =>
+        {categories.map((name, index) =>
           name === categoryValue ? (
             <S.category
               onClick={() => setcategoryValue(name)}
