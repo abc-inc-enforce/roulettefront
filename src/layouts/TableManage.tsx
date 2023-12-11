@@ -6,9 +6,17 @@ import OrderPopup from "../components/OrderPopup";
 import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
 
+type OrderItem = {
+  name: string;
+  count: number;
+  price: number;
+};
+
 const TableManage = () => {
   const [showOrderPopup, setShowOrderPopup] = useState(false);
   const [tables, setTables] = useState([]);
+  const [orderList, setOrderList] = useState<OrderItem[]>([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     // WebSocket 연결 설정
@@ -42,22 +50,69 @@ const TableManage = () => {
     };
   }, []);
 
+  const order = (tableNum: number) => {
+    console.log("sd");
+    fetch(`http://localhost:8080/orders/${tableNum}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("주문 데이터 가져오기 실패");
+        }
+      })
+      .then((data) => setOrderList(data))
+      .catch((error) => console.error("Error:", error));
+    fetch(`http://localhost:8080/totalPrice/${tableNum}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("주문 데이터 가져오기 실패");
+        }
+      })
+      .then((data) => setTotalPrice(data[0].price))
+      .catch((error) => console.error("Error:", error));
+  };
+
+  const orderComplete = (tableNum: number) => {
+    fetch(`http://localhost:8080/orders/${tableNum}`, {
+      method: "DELETE",
+    }).catch((error) => console.error("Error:", error));
+    alert(`${tableNum}번 테이블의 결제가 끝났습니다.`);
+  };
+
   return (
     <S.body>
       <Header></Header>
       {showOrderPopup && (
-        <OrderPopup
-          showOrderPopup={showOrderPopup}
-          setShowOrderPopup={setShowOrderPopup}
-          totalPrice={0}
-          left="50%"
-        ></OrderPopup>
+        <>
+          <OrderPopup
+            showOrderPopup={showOrderPopup}
+            setShowOrderPopup={setShowOrderPopup}
+            totalPrice={totalPrice}
+            left="50%"
+          >
+            {orderList.map(({ name, count, price }, index) => (
+              <li key={index}>
+                <tr>{name}</tr>
+                <tr>{count}개</tr>
+                <tr>{price * count}원</tr>
+              </li>
+            ))}
+          </OrderPopup>
+        </>
       )}
+
       <S.tablelist>
         <ul>
           {tables.map((table, index) => (
             <li key={index}>
-              <Table tableNum={table[0]} setListPopup={setShowOrderPopup} />
+              <Table
+                tableNum={table[0]}
+                setListPopup={setShowOrderPopup}
+                onOrderListClick={order}
+                onCompleteClick={orderComplete}
+              />
             </li>
           ))}
         </ul>

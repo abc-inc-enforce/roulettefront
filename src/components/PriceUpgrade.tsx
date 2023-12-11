@@ -13,7 +13,7 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
   const [discount, setDiscount] = useState(0.95);
   const [upgrade, setUpgrade] = useState(false);
   const [upgradeSuccess, setUpgradeSuccess] = useState("");
-  const basePrice = 80000;
+  const basePrice = Number(localStorage.getItem("price"));
   const [price, setPrice] = useState(basePrice);
   const [result, setResult] = useState(false);
 
@@ -41,13 +41,36 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
       setPrice(Math.floor(price * discount));
     } else {
       setPrice(basePrice * 1.5);
-      setUpgradeSuccess("강화에 실패하였습니다....");
+      alert("강화에 실패하였습니다....");
       setResult(true);
     }
     setUpgrade(true);
     const timerId = setTimeout(() => {
       setUpgrade(false);
     }, 1500);
+  };
+
+  const sendPrice = () => {
+    console.log(localStorage.getItem("price"));
+    fetch("http://localhost:8080/totalPrice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tableNum: localStorage.getItem("tableNum"),
+        price: price,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // 성공적으로 처리되면 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
+          console.log("success");
+        } else {
+          throw new Error("메뉴 생성 실패");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
   };
 
   const handleResult = () => {
@@ -61,7 +84,14 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
         <S.resultPopup>
           <h2>최종 계산서</h2>
           <S.priceBox>${price}</S.priceBox>
-          <S.Btn onClick={() => setPriceUpgrade(false)}>확인했어요</S.Btn>
+          <S.Btn
+            onClick={() => {
+              setPriceUpgrade(false);
+              sendPrice();
+            }}
+          >
+            확인했어요
+          </S.Btn>
         </S.resultPopup>
       )}
       <S.noticeline>
