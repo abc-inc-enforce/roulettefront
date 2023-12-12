@@ -17,6 +17,7 @@ const TableManage = () => {
   const [tables, setTables] = useState([]);
   const [orderList, setOrderList] = useState<OrderItem[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     // WebSocket 연결 설정
@@ -78,7 +79,11 @@ const TableManage = () => {
     fetch(`http://localhost:8080/orders/${tableNum}`, {
       method: "DELETE",
     }).catch((error) => console.error("Error:", error));
+    fetch(`http://localhost:8080/totalPrice/${tableNum}`, {
+      method: "DELETE",
+    }).catch((error) => console.error("Error:", error));
     alert(`${tableNum}번 테이블의 결제가 끝났습니다.`);
+    setTotalPrice(0);
   };
 
   return (
@@ -117,7 +122,7 @@ const TableManage = () => {
           ))}
         </ul>
       </S.tablelist>
-      {/* <S.notice>1번 테이블에 새로운 주문이 들어왔습니다.</S.notice> */}
+      {/* <S.notice>{notice}</S.notice> */}
     </S.body>
   );
 };

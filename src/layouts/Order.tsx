@@ -92,6 +92,7 @@ const Order = () => {
   };
   const InvitingUpgrade = () => {
     localStorage.setItem("price", String(totalPrice));
+
     fetch("http://localhost:8080/orders", {
       method: "POST",
       headers: {
@@ -108,6 +109,7 @@ const Order = () => {
         }
       })
       .catch((error) => console.error("Error:", error));
+
     setShowOrderPopup(false);
     setShowInvite(true);
   };
