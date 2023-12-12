@@ -103,7 +103,7 @@ export const PriceUpgrade: React.FC<PriceUpgradeProps> = ({
           <ul>
             <li>현재 확률 : {percent}%</li>
             <li>현재 가격 :{price}원</li>
-            <li>원가 : 10000원</li>
+            <li>원가 : {basePrice}</li>
           </ul>
         </S.upgradetextbox>
       </S.upgradeInfo>

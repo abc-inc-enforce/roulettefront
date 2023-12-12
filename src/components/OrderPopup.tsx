@@ -10,6 +10,8 @@ interface OrderPopupProps {
   totalPrice: number;
   InvitingUpgrade?: () => void;
   left: string;
+  onCompleteClick?: (tableNum: number) => void;
+  tableNum?: number;
   children?: React.ReactNode; // <-- 동적으로 받아올 내용
 }
 
@@ -20,6 +22,8 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
   InvitingUpgrade,
   children,
   left,
+  onCompleteClick,
+  tableNum,
 }) => {
   return (
     <>
@@ -38,9 +42,21 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
             <p>최종 결제 금액</p>
             <p>{totalPrice}원</p>
           </OrderPopupStyles.TotalPrice>
-          <OrderPopupStyles.Button onClick={InvitingUpgrade}>
-            주문
-          </OrderPopupStyles.Button>
+          {onCompleteClick ? (
+            <OrderPopupStyles.Button
+              onClick={() =>
+                onCompleteClick &&
+                tableNum !== undefined &&
+                onCompleteClick(tableNum)
+              }
+            >
+              결제완료
+            </OrderPopupStyles.Button>
+          ) : (
+            <OrderPopupStyles.Button onClick={InvitingUpgrade}>
+              주문
+            </OrderPopupStyles.Button>
+          )}
         </OrderPopupStyles.OrderPopupContainer>
       )}
     </>
