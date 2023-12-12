@@ -250,7 +250,7 @@ export const button = styled.div`
 export const Accept = styled.div`
   /* width: 50%; */
   top: 60%;
-  left: ${(props) => (props.color ? "54%" : "46%")};
+  left: ${(props) => (props.color ? "60%" : "50%")};
   position: fixed;
   transform: matrix() (-50%, -50%);
   background-color: ${(props) => (props.color ? props.color : "pink")};

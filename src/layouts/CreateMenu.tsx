@@ -1,5 +1,5 @@
 import * as S from "./CreateMenu.style";
-import Header from "../components/OnwerHeader";
+import Header from "../components/OwnerHeader";
 import { useState, useEffect } from "react";
 import React from "react";
 import MenuData from "../data/menuData";

@@ -13,6 +13,7 @@ import {
 } from "../components/OrderBar";
 
 type OrderItem = {
+  tableNum?: number;
   name: string;
   count: number;
   price: number;
@@ -26,6 +27,7 @@ const Order = () => {
   const [showOrderPopup, setShowOrderPopup] = useState(false);
   const [showInvite, setShowInvite] = useState(false);
   const [menuInfo, setMenuInfo] = useState<OrderItem>({
+    tableNum: Number(localStorage.getItem("tableNum") || 0),
     name: "",
     count: 0,
     price: 0,
@@ -61,7 +63,12 @@ const Order = () => {
     setShowMenuPopup(false);
     setOrderList((prevOrderList) => [...prevOrderList, menuInfo]);
     setTotalPrice(totalPrice + menuInfo.price * menuInfo.count);
-    setMenuInfo({ name: "", count: 1, price: 0 });
+    setMenuInfo({
+      tableNum: Number(localStorage.getItem("tableNum") || 0),
+      name: "",
+      count: 1,
+      price: 0,
+    });
     setShowAddPopup(true);
     setTimeout(() => {
       setShowAddPopup(false);
@@ -84,8 +91,49 @@ const Order = () => {
     });
   };
   const InvitingUpgrade = () => {
+    localStorage.setItem("price", String(totalPrice));
+
+    fetch("http://localhost:8080/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderList),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // 성공적으로 처리되면 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
+          console.log("success");
+        } else {
+          throw new Error("메뉴 생성 실패");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+
     setShowOrderPopup(false);
     setShowInvite(true);
+  };
+
+  const sendPrice = () => {
+    fetch("http://localhost:8080/totalPrice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tableNum: localStorage.getItem("tableNum") || 0,
+        totalPrice: totalPrice,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // 성공적으로 처리되면 메뉴 데이터를 다시 가져와서 상태를 업데이트합니다.
+          console.log("success");
+        } else {
+          throw new Error("메뉴 생성 실패");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
@@ -158,7 +206,13 @@ const Order = () => {
             >
               수락
             </S.Accept>
-            <S.Accept color="#6666CC" onClick={() => setShowInvite(false)}>
+            <S.Accept
+              color="#6666CC"
+              onClick={() => {
+                sendPrice();
+                setShowInvite(false);
+              }}
+            >
               거절
             </S.Accept>
           </>
@@ -171,6 +225,7 @@ const Order = () => {
             handleDelete={handleDelete}
             totalPrice={totalPrice}
             InvitingUpgrade={InvitingUpgrade}
+            left="58%"
           >
             {orderList.map(({ name, count, price }, index) => (
               <li key={index}>

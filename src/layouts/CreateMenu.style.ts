@@ -107,7 +107,7 @@ export const categoryList = styled.div`
 export const createMenu = styled.div`
   position: fixed;
   top: 20%;
-  left: 30%;
+  left: 36%;
   background-color: white;
   z-index: 1001;
   width: 40%;

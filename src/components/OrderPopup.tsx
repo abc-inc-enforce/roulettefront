@@ -9,6 +9,7 @@ interface OrderPopupProps {
   handleDelete?: (indexToDelete: number) => void;
   totalPrice: number;
   InvitingUpgrade?: () => void;
+  left: string;
   children?: React.ReactNode; // <-- 동적으로 받아올 내용
 }
 
@@ -18,11 +19,12 @@ const OrderPopup: React.FC<OrderPopupProps> = ({
   totalPrice,
   InvitingUpgrade,
   children,
+  left,
 }) => {
   return (
     <>
       {showOrderPopup && (
-        <OrderPopupStyles.OrderPopupContainer>
+        <OrderPopupStyles.OrderPopupContainer color={left}>
           <OrderPopupStyles.PopupHeader>
             <h3>주문 내역</h3>
             <p id="cancle" onClick={() => setShowOrderPopup(false)}>

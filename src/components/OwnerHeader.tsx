@@ -1,8 +1,8 @@
-import * as S from "./OnwerHeader.style";
+import * as S from "./OwnerHeader.style";
 import backIcon from "../assets/back.svg";
 import { useNavigate, Link } from "react-router-dom";
 
-const OnwerHeader = () => {
+const OwnerHeader = () => {
   const navigate = useNavigate();
   const handleBackClick = () => {
     navigate("/");
@@ -23,4 +23,4 @@ const OnwerHeader = () => {
     </>
   );
 };
-export default OnwerHeader;
+export default OwnerHeader;

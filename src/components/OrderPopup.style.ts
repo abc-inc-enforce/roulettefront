@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const OrderPopupContainer = styled.div`
   position: fixed;
-  top: 53%;
-  left: 50%;
+  top: 50%;
+  left: ${(props) => props.color};
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 20px;
@@ -94,7 +94,7 @@ export const Button = styled.div`
 export const inviteUpgrade = styled.div`
   position: fixed;
   top: 50%;
-  left: 53%;
+  left: ${(props) => (props.color == "50%" ? "53%" : "61%")};
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 3%;
