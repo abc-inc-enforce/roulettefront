@@ -5,6 +5,7 @@ import Header from "../components/OwnerHeader";
 import OrderPopup from "../components/OrderPopup";
 import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
+import { tableNum } from "../components/Table.style";
 
 type OrderItem = {
   name: string;
@@ -18,6 +19,7 @@ const TableManage = () => {
   const [orderList, setOrderList] = useState<OrderItem[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [notice, setNotice] = useState("");
+  const [num, setNum] = useState(0);
 
   useEffect(() => {
     // WebSocket 연결 설정
@@ -53,6 +55,7 @@ const TableManage = () => {
 
   const order = (tableNum: number) => {
     console.log("sd");
+    setNum(tableNum);
     fetch(`http://localhost:8080/orders/${tableNum}`)
       .then((response) => {
         if (response.ok) {
@@ -84,6 +87,7 @@ const TableManage = () => {
     }).catch((error) => console.error("Error:", error));
     alert(`${tableNum}번 테이블의 결제가 끝났습니다.`);
     setTotalPrice(0);
+    window.location.reload();
   };
 
   return (
@@ -95,6 +99,8 @@ const TableManage = () => {
             showOrderPopup={showOrderPopup}
             setShowOrderPopup={setShowOrderPopup}
             totalPrice={totalPrice}
+            onCompleteClick={orderComplete}
+            tableNum={num}
             left="50%"
           >
             {orderList.map(({ name, count, price }, index) => (
@@ -116,7 +122,6 @@ const TableManage = () => {
                 tableNum={table[0]}
                 setListPopup={setShowOrderPopup}
                 onOrderListClick={order}
-                onCompleteClick={orderComplete}
               />
             </li>
           ))}

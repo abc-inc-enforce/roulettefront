@@ -29,7 +29,8 @@ export const tableBtn = styled.div`
   border: ${(props) => (props.color ? "none" : "1.3px solid lightgrey")};
   border-radius: 15px;
   margin: auto;
-  margin-bottom: 3%;
+  /* margin-bottom: 3%; */
+  margin-top: 20%;
   &:hover {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
     cursor: pointer;
